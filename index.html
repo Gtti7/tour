@@ -1,0 +1,1587 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>WanderGo - Explore The World</title>
+
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        body {
+            background: #f5f7fb;
+            color: #222;
+        }
+
+
+        /* ================= NAVBAR ================= */
+
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(0, 0, 0, 0.45);
+            backdrop-filter: blur(12px);
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: auto;
+            padding: 18px 25px;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+            color: white;
+        }
+
+        .logo span {
+            color: #00e5ff;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        nav ul li a:hover {
+            color: #00e5ff;
+        }
+
+        .menu-btn {
+            display: none;
+            color: white;
+            font-size: 28px;
+            cursor: pointer;
+        }
+
+
+        /* ================= HERO ================= */
+
+        .hero {
+            height: 100vh;
+
+            background:
+                linear-gradient(
+                    rgba(0, 0, 0, 0.35),
+                    rgba(0, 0, 0, 0.55)
+                ),
+                url("https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=2000&q=85")
+                center / cover no-repeat;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            text-align: center;
+
+            padding: 20px;
+        }
+
+        .hero-content {
+            color: white;
+            max-width: 850px;
+        }
+
+        .hero-content h1 {
+            font-size: 65px;
+            margin-bottom: 20px;
+        }
+
+        .hero-content h1 span {
+            color: #00e5ff;
+        }
+
+        .hero-content p {
+            font-size: 20px;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+
+
+        /* ================= BUTTON ================= */
+
+        .btn {
+            display: inline-block;
+
+            padding: 14px 30px;
+
+            background: #00c9e8;
+
+            color: white;
+
+            border-radius: 30px;
+
+            text-decoration: none;
+
+            font-weight: bold;
+
+            transition: 0.3s;
+
+            border: none;
+
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            transform: translateY(-4px);
+            background: #008fa5;
+        }
+
+
+        /* ================= SEARCH BOX ================= */
+
+        .search-box {
+            background: white;
+
+            max-width: 900px;
+
+            margin: -50px auto 70px;
+
+            position: relative;
+
+            z-index: 10;
+
+            padding: 25px;
+
+            border-radius: 20px;
+
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+
+            display: grid;
+
+            grid-template-columns: repeat(3, 1fr) auto;
+
+            gap: 15px;
+        }
+
+        .search-box input,
+        .search-box select {
+            padding: 15px;
+
+            border: 1px solid #ddd;
+
+            border-radius: 10px;
+
+            outline: none;
+
+            width: 100%;
+        }
+
+
+        /* ================= COMMON ================= */
+
+        section {
+            padding: 80px 7%;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section-title h2 {
+            font-size: 40px;
+            margin-bottom: 10px;
+        }
+
+        .section-title p {
+            color: #777;
+        }
+
+
+        /* ================= DESTINATIONS ================= */
+
+        .destinations {
+            display: grid;
+
+            grid-template-columns: repeat(3, 1fr);
+
+            gap: 25px;
+        }
+
+        .destination-card {
+            height: 350px;
+
+            border-radius: 20px;
+
+            overflow: hidden;
+
+            position: relative;
+
+            cursor: pointer;
+        }
+
+        .destination-card img {
+            width: 100%;
+
+            height: 100%;
+
+            object-fit: cover;
+
+            transition: 0.5s;
+        }
+
+        .destination-card:hover img {
+            transform: scale(1.1);
+        }
+
+        .destination-info {
+            position: absolute;
+
+            bottom: 0;
+
+            width: 100%;
+
+            padding: 25px;
+
+            color: white;
+
+            background:
+                linear-gradient(
+                    transparent,
+                    rgba(0, 0, 0, 0.85)
+                );
+        }
+
+        .destination-info h3 {
+            font-size: 28px;
+        }
+
+
+        /* ================= PACKAGES ================= */
+
+        .packages {
+            background: #eef4f8;
+        }
+
+        .package-container {
+            display: grid;
+
+            grid-template-columns: repeat(3, 1fr);
+
+            gap: 30px;
+        }
+
+        .package-card {
+            background: white;
+
+            border-radius: 20px;
+
+            overflow: hidden;
+
+            box-shadow:
+                0 10px 30px rgba(0, 0, 0, 0.08);
+
+            transition: 0.3s;
+        }
+
+        .package-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .package-card img {
+            width: 100%;
+
+            height: 220px;
+
+            object-fit: cover;
+        }
+
+        .package-content {
+            padding: 25px;
+        }
+
+        .package-content h3 {
+            font-size: 23px;
+
+            margin-bottom: 10px;
+        }
+
+        .package-content p {
+            color: #777;
+
+            line-height: 1.6;
+        }
+
+        .price {
+            font-size: 25px;
+
+            font-weight: bold;
+
+            margin: 18px 0;
+
+            color: #00a6c7;
+        }
+
+
+        /* ================= FEATURES ================= */
+
+        .features {
+            display: grid;
+
+            grid-template-columns: repeat(4, 1fr);
+
+            gap: 25px;
+        }
+
+        .feature {
+            background: white;
+
+            padding: 35px 20px;
+
+            text-align: center;
+
+            border-radius: 18px;
+
+            box-shadow:
+                0 8px 25px rgba(0, 0, 0, 0.07);
+        }
+
+        .feature .icon {
+            font-size: 45px;
+
+            margin-bottom: 15px;
+        }
+
+        .feature h3 {
+            margin-bottom: 10px;
+        }
+
+        .feature p {
+            color: #777;
+        }
+
+
+        /* ================= ABOUT ================= */
+
+        .about {
+            display: grid;
+
+            grid-template-columns: 1fr 1fr;
+
+            gap: 60px;
+
+            align-items: center;
+        }
+
+        .about img {
+            width: 100%;
+
+            border-radius: 25px;
+        }
+
+        .about-content h2 {
+            font-size: 42px;
+
+            margin-bottom: 20px;
+        }
+
+        .about-content p {
+            color: #666;
+
+            line-height: 1.8;
+
+            margin-bottom: 25px;
+        }
+
+
+        /* ================= REVIEWS ================= */
+
+        .reviews {
+            background: #eef4f8;
+        }
+
+        .review-container {
+            display: grid;
+
+            grid-template-columns: repeat(3, 1fr);
+
+            gap: 25px;
+        }
+
+        .review {
+            background: white;
+
+            padding: 30px;
+
+            border-radius: 20px;
+
+            box-shadow:
+                0 8px 25px rgba(0, 0, 0, 0.07);
+        }
+
+        .stars {
+            color: #ffb400;
+
+            font-size: 20px;
+
+            margin-bottom: 15px;
+        }
+
+        .review p {
+            color: #666;
+
+            line-height: 1.7;
+
+            margin-bottom: 20px;
+        }
+
+        .review h4 {
+            font-size: 18px;
+        }
+
+
+        /* ================= CONTACT ================= */
+
+        .contact {
+            max-width: 800px;
+
+            margin: auto;
+        }
+
+        .contact-form {
+            background: white;
+
+            padding: 35px;
+
+            border-radius: 20px;
+
+            box-shadow:
+                0 10px 30px rgba(0, 0, 0, 0.08);
+        }
+
+        .contact-form input,
+        .contact-form textarea {
+            width: 100%;
+
+            padding: 15px;
+
+            margin-bottom: 15px;
+
+            border: 1px solid #ddd;
+
+            border-radius: 10px;
+
+            outline: none;
+        }
+
+        .contact-form textarea {
+            height: 130px;
+
+            resize: none;
+        }
+
+
+        /* ================= FOOTER ================= */
+
+        footer {
+            background: #101820;
+
+            color: white;
+
+            padding: 50px 7%;
+
+            text-align: center;
+        }
+
+        footer h2 {
+            margin-bottom: 15px;
+        }
+
+        footer p {
+            color: #aaa;
+
+            margin-bottom: 20px;
+        }
+
+        .social {
+            display: flex;
+
+            justify-content: center;
+
+            gap: 15px;
+
+            margin-bottom: 25px;
+        }
+
+        .social a {
+            width: 40px;
+
+            height: 40px;
+
+            background: #1e303c;
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+            border-radius: 50%;
+
+            color: white;
+
+            text-decoration: none;
+        }
+
+
+        /* ================= MOBILE ================= */
+
+        @media (max-width: 900px) {
+
+            nav ul {
+                display: none;
+
+                position: absolute;
+
+                top: 70px;
+
+                right: 20px;
+
+                background: #111;
+
+                width: 200px;
+
+                padding: 20px;
+
+                border-radius: 12px;
+
+                flex-direction: column;
+            }
+
+            nav ul.active {
+                display: flex;
+            }
+
+            .menu-btn {
+                display: block;
+            }
+
+            .hero-content h1 {
+                font-size: 45px;
+            }
+
+            .search-box {
+                grid-template-columns: 1fr;
+
+                margin: -30px 20px 50px;
+            }
+
+            .destinations,
+            .package-container,
+            .review-container {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .features {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .about {
+                grid-template-columns: 1fr;
+            }
+        }
+
+
+        @media (max-width: 600px) {
+
+            section {
+                padding: 60px 20px;
+            }
+
+            .hero-content h1 {
+                font-size: 38px;
+            }
+
+            .hero-content p {
+                font-size: 16px;
+            }
+
+            .destinations,
+            .package-container,
+            .review-container,
+            .features {
+                grid-template-columns: 1fr;
+            }
+
+            .section-title h2 {
+                font-size: 32px;
+            }
+
+            .about-content h2 {
+                font-size: 32px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- ================= NAVBAR ================= -->
+
+<header>
+
+    <nav>
+
+        <div class="logo">
+            Wander<span>Go</span>
+        </div>
+
+
+        <div
+            class="menu-btn"
+            onclick="toggleMenu()"
+        >
+            ☰
+        </div>
+
+
+        <ul id="navMenu">
+
+            <li>
+                <a href="#home">Home</a>
+            </li>
+
+            <li>
+                <a href="#destinations">
+                    Destinations
+                </a>
+            </li>
+
+            <li>
+                <a href="#packages">
+                    Packages
+                </a>
+            </li>
+
+            <li>
+                <a href="#about">
+                    About
+                </a>
+            </li>
+
+            <li>
+                <a href="#contact">
+                    Contact
+                </a>
+            </li>
+
+        </ul>
+
+    </nav>
+
+</header>
+
+
+
+<!-- ================= HERO ================= -->
+
+<section
+    class="hero"
+    id="home"
+>
+
+    <div class="hero-content">
+
+        <h1>
+            Explore The
+            <span>World</span>
+        </h1>
+
+        <p>
+            Discover beautiful destinations,
+            unforgettable adventures and amazing
+            experiences with WanderGo.
+        </p>
+
+        <a
+            href="#packages"
+            class="btn"
+        >
+            Explore Tours
+        </a>
+
+    </div>
+
+</section>
+
+
+
+<!-- ================= SEARCH ================= -->
+
+<div class="search-box">
+
+    <input
+        type="text"
+        id="searchDestination"
+        placeholder="Where do you want to go?"
+    >
+
+    <input
+        type="date"
+        id="searchDate"
+    >
+
+    <select id="searchPersons">
+
+        <option>1 Person</option>
+
+        <option>2 Persons</option>
+
+        <option>3 Persons</option>
+
+        <option>4+ Persons</option>
+
+    </select>
+
+    <button
+        class="btn"
+        onclick="searchTour()"
+    >
+        Search
+    </button>
+
+</div>
+
+
+
+<!-- ================= DESTINATIONS ================= -->
+
+<section id="destinations">
+
+    <div class="section-title">
+
+        <h2>
+            Popular Destinations
+        </h2>
+
+        <p>
+            Explore some of the most beautiful
+            places around the world.
+        </p>
+
+    </div>
+
+
+    <div class="destinations">
+
+
+        <!-- MANALI -->
+
+        <div class="destination-card">
+
+            <img
+                src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1200&q=85"
+                alt="Manali"
+            >
+
+            <div class="destination-info">
+
+                <h3>Manali</h3>
+
+                <p>
+                    Himachal Pradesh, India
+                </p>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- GOA -->
+
+        <div class="destination-card">
+
+            <img
+                src="https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?auto=format&fit=crop&w=1200&q=85"
+                alt="Goa Beach"
+            >
+
+            <div class="destination-info">
+
+                <h3>Goa</h3>
+
+                <p>
+                    Beach Paradise, India
+                </p>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- DUBAI -->
+
+        <div class="destination-card">
+
+            <img
+                src="https://images.unsplash.com/photo-1530789253388-582c481c54b0?auto=format&fit=crop&w=1200&q=85"
+                alt="Dubai"
+            >
+
+            <div class="destination-info">
+
+                <h3>Dubai</h3>
+
+                <p>
+                    United Arab Emirates
+                </p>
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+</section>
+
+
+
+<!-- ================= PACKAGES ================= -->
+
+<section
+    class="packages"
+    id="packages"
+>
+
+    <div class="section-title">
+
+        <h2>
+            Best Tour Packages
+        </h2>
+
+        <p>
+            Choose your perfect holiday package.
+        </p>
+
+    </div>
+
+
+    <div class="package-container">
+
+
+        <!-- MANALI PACKAGE -->
+
+        <div class="package-card">
+
+            <img
+                src="https://images.unsplash.com/photo-1518005020951-eccb494ad742?auto=format&fit=crop&w=1200&q=85"
+                alt="Manali Adventure"
+            >
+
+            <div class="package-content">
+
+                <h3>
+                    Manali Adventure
+                </h3>
+
+                <p>
+                    5 Days / 4 Nights · Hotel ·
+                    Food · Sightseeing
+                </p>
+
+                <div class="price">
+                    ₹12,999
+                </div>
+
+                <a
+                    href="#contact"
+                    class="btn"
+                >
+                    Book Now
+                </a>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- GOA PACKAGE -->
+
+        <div class="package-card">
+
+            <img
+                src="https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?auto=format&fit=crop&w=1200&q=85"
+                alt="Goa Beach Holiday"
+            >
+
+            <div class="package-content">
+
+                <h3>
+                    Goa Beach Holiday
+                </h3>
+
+                <p>
+                    4 Days / 3 Nights · Hotel ·
+                    Beach Tour · Food
+                </p>
+
+                <div class="price">
+                    ₹9,999
+                </div>
+
+                <a
+                    href="#contact"
+                    class="btn"
+                >
+                    Book Now
+                </a>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- DUBAI PACKAGE -->
+
+        <div class="package-card">
+
+            <img
+                src="https://images.unsplash.com/photo-1518684079-3c830dcef090?auto=format&fit=crop&w=1200&q=85"
+                alt="Dubai Explorer"
+            >
+
+            <div class="package-content">
+
+                <h3>
+                    Dubai Explorer
+                </h3>
+
+                <p>
+                    6 Days / 5 Nights · Hotel ·
+                    City Tour · Desert Safari
+                </p>
+
+                <div class="price">
+                    ₹49,999
+                </div>
+
+                <a
+                    href="#contact"
+                    class="btn"
+                >
+                    Book Now
+                </a>
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+</section>
+
+
+
+<!-- ================= FEATURES ================= -->
+
+<section>
+
+    <div class="section-title">
+
+        <h2>
+            Why Travel With Us?
+        </h2>
+
+        <p>
+            We make your journey simple,
+            safe and memorable.
+        </p>
+
+    </div>
+
+
+    <div class="features">
+
+
+        <div class="feature">
+
+            <div class="icon">
+                ✈️
+            </div>
+
+            <h3>
+                Easy Booking
+            </h3>
+
+            <p>
+                Quick and simple tour booking.
+            </p>
+
+        </div>
+
+
+
+        <div class="feature">
+
+            <div class="icon">
+                🏨
+            </div>
+
+            <h3>
+                Best Hotels
+            </h3>
+
+            <p>
+                Comfortable hotels at great prices.
+            </p>
+
+        </div>
+
+
+
+        <div class="feature">
+
+            <div class="icon">
+                🛡️
+            </div>
+
+            <h3>
+                Safe Travel
+            </h3>
+
+            <p>
+                Your safety is our priority.
+            </p>
+
+        </div>
+
+
+
+        <div class="feature">
+
+            <div class="icon">
+                💰
+            </div>
+
+            <h3>
+                Best Price
+            </h3>
+
+            <p>
+                Affordable packages for everyone.
+            </p>
+
+        </div>
+
+
+    </div>
+
+</section>
+
+
+
+<!-- ================= ABOUT ================= -->
+
+<section id="about">
+
+    <div class="about">
+
+
+        <img
+            src="https://images.unsplash.com/photo-1527631746610-bca00a040d60?auto=format&fit=crop&w=1200&q=85"
+            alt="Travel"
+        >
+
+
+        <div class="about-content">
+
+            <h2>
+                Travel More.
+                <br>
+                Create Memories.
+            </h2>
+
+            <p>
+                WanderGo is a modern travel platform
+                created for travellers who love
+                exploring new places.
+            </p>
+
+            <p>
+                From mountains and beaches to
+                international adventures, we help you
+                plan your perfect trip.
+            </p>
+
+            <a
+                href="#contact"
+                class="btn"
+            >
+                Plan My Trip
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- ================= REVIEWS ================= -->
+
+<section class="reviews">
+
+    <div class="section-title">
+
+        <h2>
+            What Travellers Say
+        </h2>
+
+        <p>
+            Real experiences from our happy travellers.
+        </p>
+
+    </div>
+
+
+    <div class="review-container">
+
+
+        <div class="review">
+
+            <div class="stars">
+                ★★★★★
+            </div>
+
+            <p>
+                "Amazing experience! The hotel and
+                sightseeing arrangements were excellent."
+            </p>
+
+            <h4>
+                Rahul Sharma
+            </h4>
+
+        </div>
+
+
+
+        <div class="review">
+
+            <div class="stars">
+                ★★★★★
+            </div>
+
+            <p>
+                "Our Goa trip was perfectly planned.
+                Everything was smooth and enjoyable."
+            </p>
+
+            <h4>
+                Priya Das
+            </h4>
+
+        </div>
+
+
+
+        <div class="review">
+
+            <div class="stars">
+                ★★★★★
+            </div>
+
+            <p>
+                "Very professional service and
+                reasonable price. Highly recommended!"
+            </p>
+
+            <h4>
+                Arjun Roy
+            </h4>
+
+        </div>
+
+
+    </div>
+
+</section>
+
+
+
+<!-- ================= CONTACT ================= -->
+
+<section id="contact">
+
+    <div class="section-title">
+
+        <h2>
+            Plan Your Trip
+        </h2>
+
+        <p>
+            Send us your travel requirements.
+        </p>
+
+    </div>
+
+
+    <div class="contact">
+
+
+        <form
+            class="contact-form"
+            id="travelForm"
+        >
+
+
+            <input
+                type="text"
+                id="name"
+                placeholder="Your Name"
+                required
+            >
+
+
+            <input
+                type="tel"
+                id="phone"
+                placeholder="Phone Number"
+                required
+            >
+
+
+            <input
+                type="text"
+                id="destination"
+                placeholder="Destination"
+                required
+            >
+
+
+            <input
+                type="email"
+                id="email"
+                placeholder="Email Address"
+                required
+            >
+
+
+            <textarea
+                id="trip"
+                placeholder="Tell us about your trip..."
+                required
+            ></textarea>
+
+
+            <button
+                class="btn"
+                type="submit"
+                id="submitBtn"
+            >
+                Send Enquiry
+            </button>
+
+
+        </form>
+
+    </div>
+
+</section>
+
+
+
+<!-- ================= FOOTER ================= -->
+
+<footer>
+
+    <h2>
+        WanderGo 🌍
+    </h2>
+
+    <p>
+        Explore. Travel. Experience.
+    </p>
+
+
+    <div class="social">
+
+        <a href="#">
+            f
+        </a>
+
+        <a href="#">
+            𝕏
+        </a>
+
+        <a href="#">
+            ◎
+        </a>
+
+        <a href="#">
+            ▶
+        </a>
+
+    </div>
+
+
+    <p>
+        © 2026 WanderGo.
+        All Rights Reserved.
+    </p>
+
+</footer>
+
+
+
+<!-- ================= JAVASCRIPT ================= -->
+
+<script>
+
+/* ==========================================
+   MOBILE MENU
+========================================== */
+
+function toggleMenu() {
+
+    document
+        .getElementById("navMenu")
+        .classList
+        .toggle("active");
+
+}
+
+
+/* ==========================================
+   SEARCH
+========================================== */
+
+function searchTour() {
+
+    const destination =
+        document
+        .getElementById("searchDestination")
+        .value
+        .trim();
+
+    const date =
+        document
+        .getElementById("searchDate")
+        .value;
+
+    const persons =
+        document
+        .getElementById("searchPersons")
+        .value;
+
+
+    if (destination === "") {
+
+        alert("Please enter your destination.");
+
+        return;
+
+    }
+
+
+    alert(
+        "Destination: " +
+        destination +
+        "\nDate: " +
+        (date || "Not selected") +
+        "\nTravellers: " +
+        persons
+    );
+
+}
+
+
+/* ==========================================
+   GOOGLE APPS SCRIPT URL
+========================================== */
+
+const SCRIPT_URL =
+"https://script.google.com/macros/s/AKfycbwqpU9GWi4InZplhITrjQ1csmIINTJdJHIyIBQsy9uPjboNV6LWwaiBuo7zM5WLI7REZw/exec";
+
+
+/* ==========================================
+   TRAVEL ENQUIRY FORM
+========================================== */
+
+document
+    .getElementById("travelForm")
+    .addEventListener("submit", function(event) {
+
+        event.preventDefault();
+
+
+        const form =
+            document.getElementById("travelForm");
+
+
+        const submitBtn =
+            document.getElementById("submitBtn");
+
+
+        /* Get values */
+
+        const name =
+            document.getElementById("name")
+            .value
+            .trim();
+
+
+        const phone =
+            document.getElementById("phone")
+            .value
+            .trim();
+
+
+        const destination =
+            document.getElementById("destination")
+            .value
+            .trim();
+
+
+        const email =
+            document.getElementById("email")
+            .value
+            .trim();
+
+
+        const trip =
+            document.getElementById("trip")
+            .value
+            .trim();
+
+
+        /* Check fields */
+
+        if (
+            name === "" ||
+            phone === "" ||
+            destination === "" ||
+            email === "" ||
+            trip === ""
+        ) {
+
+            alert("Please fill in all fields.");
+
+            return;
+
+        }
+
+
+        /* Button loading */
+
+        submitBtn.disabled = true;
+
+        submitBtn.innerText = "Submitting...";
+
+
+        /* Create form data */
+
+        const data = new URLSearchParams();
+
+        data.append("name", name);
+        data.append("phone", phone);
+        data.append("destination", destination);
+        data.append("email", email);
+        data.append("trip", trip);
+
+
+        /* Send to Google Apps Script */
+
+        fetch(SCRIPT_URL, {
+
+            method: "POST",
+
+            body: data,
+
+            mode: "no-cors"
+
+        })
+
+
+        .then(function() {
+
+            alert(
+                "✅ Thank you!\n\n" +
+                "Your travel enquiry has been submitted successfully."
+            );
+
+
+            /* Clear form */
+
+            form.reset();
+
+
+            /* Reset button */
+
+            submitBtn.disabled = false;
+
+            submitBtn.innerText = "Send Enquiry";
+
+        })
+
+
+        .catch(function(error) {
+
+            console.error(
+                "Submission Error:",
+                error
+            );
+
+
+            alert(
+                "❌ Submission failed.\n\n" +
+                "Please check your internet connection or Apps Script deployment."
+            );
+
+
+            submitBtn.disabled = false;
+
+            submitBtn.innerText = "Send Enquiry";
+
+        });
+
+    });
+
+</script>
+
+
+</body>
+
+</html>
+```
